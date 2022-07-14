@@ -8,7 +8,7 @@ export default function Contact(){
 
     return (
         <form
-            className='rounded-lg shadow-xl flex flex-col px-8 py-8 dark:bg-blue-500'
+            className='w-[650px] mt-10 rounded-lg shadow-xl flex flex-col px-8 py-8 dark:bg-blue-500'
         >
             <h1 className='text-2xl font-bold dark:text-gray-50'>Send Message</h1>
             <label htmlFor='fullname' className='text-gray-500 light mt-8 dark:text-gray-50'>
