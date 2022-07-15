@@ -6,8 +6,20 @@ export default function Contact(){
     const [subject, setSubject] = useState('')
     const [message, setMessage] = useState('')
 
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+
+        const res = await fetch('api/sendgrid', {
+            body: JSON.stringify({ email: email, fullname: fullname, subject: subject, message: message }),
+            headers: { "Content-Type": "application/json"},
+            method: "POST"
+        })
+
+        await res.json()
+    }
+
     return (
-        <form className='w-[650px] mt-10 rounded-lg shadow-xl flex flex-col px-8 py-8 dark:bg-blue-500'>
+        <form onSubmit={handleSubmit} className='w-[650px] mt-10 rounded-lg shadow-xl flex flex-col px-8 py-8 dark:bg-blue-500'>
             
             <h1 className='text-2xl font-bold dark:text-gray-50'>Send Message</h1>
 

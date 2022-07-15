@@ -8,9 +8,13 @@ async function sendEmail(req, res){
         await sgMail.send({
             to: 'abu.sammie@gmail.com',
             from: '3310572@myuwc.ac.za',
-            subject: 'Learning Send Grid',
-            text: 'I hope this works...this is the text',
-            html: '<strong>html strong tag...this is html</strong>'
+            subject: `Subject from SendGrid: ${req.body.subject}`,
+            html: `<h4>You've got mail from ${req.body.fullname}, their email is ${req.body.email}</h4>
+                    <h4>Message: </h4> <p>${req.body.message}</p>`
+        }).then(() => {
+            console.log('Email Sent')
+        }).catch((err) => {
+            console.error(err)
         })
     }catch(err){
         console.log(err)
