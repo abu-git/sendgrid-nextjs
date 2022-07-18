@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import validator from 'validator'
 
 export default function Contact(){
     const [fullname, setFullname] = useState('')
@@ -6,8 +7,19 @@ export default function Contact(){
     const [subject, setSubject] = useState('')
     const [message, setMessage] = useState('')
 
+    const handleValidation = () => {
+        let tempErrors = {}
+        let isValid = true
+
+        console.log(validator.isEmpty(fullname))
+        return isValid
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault()
+
+        let isValidForm = handleValidation()
+
 
         const res = await fetch('api/sendgrid', {
             body: JSON.stringify({ email: email, fullname: fullname, subject: subject, message: message }),
