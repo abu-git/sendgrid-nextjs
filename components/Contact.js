@@ -7,11 +7,29 @@ export default function Contact(){
     const [subject, setSubject] = useState('')
     const [message, setMessage] = useState('')
 
+    //Form validation
+    const [errors, setErrors] = useState({})
+
     const handleValidation = () => {
         let tempErrors = {}
-        let isValid = true
+        let isValid = false //true default
 
-        console.log(validator.isEmpty(fullname))
+        if(validator.isEmpty(fullname)){
+            tempErrors['fullname'] = true
+            isValid = false
+        }else if(validator.isEmpty(email)){
+            tempErrors['email'] = true
+            isValid = false
+        }else if(validator.isEmpty(subject)){
+            tempErrors['subject'] = true
+            isValid = false
+        }else if(validator.isEmpty(message)){
+            tempErrors['message'] = true
+            isValid = false
+        }
+
+        setErrors({...tempErrors})
+        console.log('errors', errors)
         return isValid
     }
 
@@ -19,15 +37,18 @@ export default function Contact(){
         e.preventDefault()
 
         let isValidForm = handleValidation()
+        
+        if(isValidForm){
+            const res = await fetch('api/sendgrid', {
+                body: JSON.stringify({ email: email, fullname: fullname, subject: subject, message: message }),
+                headers: { "Content-Type": "application/json"},
+                method: "POST"
+            })
+    
+            await res.json()
+        }
 
-
-        const res = await fetch('api/sendgrid', {
-            body: JSON.stringify({ email: email, fullname: fullname, subject: subject, message: message }),
-            headers: { "Content-Type": "application/json"},
-            method: "POST"
-        })
-
-        await res.json()
+        
     }
 
     return (
