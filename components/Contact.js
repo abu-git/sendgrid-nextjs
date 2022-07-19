@@ -67,6 +67,9 @@ export default function Contact(){
                 name='fullname'
                 className='bg-transparent borber-b py-2 pl-4 focus:outline-none focus:rounded-md focus:ring-1 ring-green-500 font-light text-gray-500' 
             />
+            {errors?.fullname && (
+                <p className='text-red-500'>Full name cannot be empty</p>
+            )}
 
             <label htmlFor='email' className='text-gray-500 font-light mt-4 dark:text-gray-50'>
                 Email<span className='text-red-500 dark:text-gray-50'>*</span>
@@ -78,6 +81,9 @@ export default function Contact(){
                 onChange={(e) => { setEmail(e.target.value) }}
                 className='bg-transparent borber-b py-2 pl-4 focus:outline-none focus:rounded-md focus:ring-1 ring-green-500 font-light text-gray-500' 
             />
+            {errors?.email && (
+                <p className='text-red-500'>Email cannot be empty</p>
+            )}
 
             <label htmlFor='subject' className='text-gray-500 font-light mt-4 dark:text-gray-50'>
                 Subject<span className='text-red-500 dark:text-gray-50'>*</span>
@@ -89,6 +95,9 @@ export default function Contact(){
                 onChange={(e) => { setSubject(e.target.value) }}
                 className='bg-transparent borber-b py-2 pl-4 focus:outline-none focus:rounded-md focus:ring-1 ring-green-500 font-light text-gray-500' 
             />
+            {errors?.subject && (
+                <p className='text-red-500'>Subject cannot be empty</p>
+            )}
 
             <label htmlFor='message' className='text-gray-500 font-light mt-4 dark:text-gray-50'>
                 Message<span className='text-red-500'>*</span>
@@ -99,6 +108,9 @@ export default function Contact(){
                 onChange={ (e) => { setMessage(e.target.value) } }
                 className="bg-transparent border-b py-2 pl-4 focus:outline-none focus:rounded-md focus:ring-1 ring-green-500 font-light text-gray-500"
             ></textarea>
+            {errors?.message && (
+                <p className='text-red-500'>Message cannot be empty</p>
+            )}
 
             <div className='flex flex-row items-center justify-start'>
                 <button
